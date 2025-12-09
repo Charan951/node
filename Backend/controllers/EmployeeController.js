@@ -17,7 +17,27 @@ const createEmployee=async(req,res)=>{
         res.status(500).json({ message: err.message });
     }
 }
+const getEmployees=async(req,res)=>{
+    try{
+        const employees=await Employee.find();   // fetching all employees from database
+
+        res.status(200).json(employees);   // sending the fetched employees as response
+    }
+    catch(err){
+        res.status(500).json({ message: err.message });
+    }
+}
+
+const getEmployeeById=async(req,res)=>{
+    try{
+        const employee=await Employee.findById(req.params.name);
+        res.status(200).json(employee);
+    }
+    catch(err){
+        res.status(500).json({message:err.message});
+    }
+}
 
 
 
- module.exports={createEmployee};
+ module.exports={createEmployee,getEmployees,getEmployeeById};

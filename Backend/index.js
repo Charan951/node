@@ -11,7 +11,7 @@ app.use(express.json());
 
 dotenv.config();
 
-app.use('/employee',employeroutes);
+app.use('/api/employee',employeroutes);
 
 mongoose.connect(process.env.MONGO_URL).then(()=>{
     console.log('Connected to MongoDB');

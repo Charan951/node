@@ -30,8 +30,34 @@ const getEmployees=async(req,res)=>{
 
 const getEmployeeById=async(req,res)=>{
     try{
-        const employee=await Employee.findById(req.params.name);
+        const employee=await Employee.findById(req.params.id);
         res.status(200).json(employee);
+    }
+    catch(err){
+        res.status(500).json({message:err.message});
+    }
+}
+
+const updateEmployee=async(req,res)=>{
+    try{
+        const updateEmployee=await Employee.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            {new:true}
+        );
+        res.status(200).json(updateEmployee);
+        
+    }
+    catch(err){
+        res.status(500).json({message:err.message});
+    }
+            
+}
+
+const deleteEmployee=async(req,res)=>{
+    try{
+        const deleteEmployee=await Employee.findByIdAndDelete(req.params.id);
+        res.status(200).json(deleteEmployee);
     }
     catch(err){
         res.status(500).json({message:err.message});
@@ -40,4 +66,4 @@ const getEmployeeById=async(req,res)=>{
 
 
 
- module.exports={createEmployee,getEmployees,getEmployeeById};
+ module.exports={createEmployee,getEmployees,getEmployeeById,updateEmployee,deleteEmployee};
